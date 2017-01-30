@@ -5,7 +5,6 @@
 using namespace std;
 
 int main() {
-
 	return 0;
 }
 
@@ -20,7 +19,7 @@ int parseCommand(char *input) {
 	}
 	else if(!strcmp(input, "DELETE")) {
 		return DELETE;
-	}	
+	}
 	else if(!strcmp(input, "EXIT")) {
 		return EXIT;
 	}
@@ -29,11 +28,11 @@ int parseCommand(char *input) {
 	}
 }
 
-//adds a student the vector: list. 
+//adds a student the vector: list.
 Node* getInfo() {
 	Student* student = new Student();
 	Node newNode = new Node(student);
-	
+
 	cout << "Enter first name: ";
 	cin >> student->first;
 	cin.clear();
@@ -46,13 +45,13 @@ Node* getInfo() {
 	//deals with id
 	cout << "Enter ID number: ";
 	cin >> student->id;
-	
-	cin.clear();	
-	
+
+	cin.clear();
+
 	//deals with gpa
 	cout << "Enter GPA: ";
 	cin >> student->gpa;
-	
+
 	return newNode;
 }
 
