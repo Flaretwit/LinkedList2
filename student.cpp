@@ -35,3 +35,15 @@ char* Student::getLast() {
 	return last;
 }
 
+void Student::setId(int newId) {
+	id = newId;
+}
+void Student::setGpa(int newGPA) {
+	gpa = newGPA;
+}
+void Student::setId(int newId) {
+	id = newId;
+}
+void Student::setId(int newId) {
+	id = newId;
+}

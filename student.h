@@ -1,7 +1,7 @@
-//student.h 
+//student.h
 //Header file for the Student class
 
-using namepsace std;
+using namespace std;
 
 class Student {
 	public:

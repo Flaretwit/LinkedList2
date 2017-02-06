@@ -9,12 +9,19 @@
 
 using namespace std;
 
+int parseCommand(char* input);
+Node* getInfo();
+void add(Node* current, Node* head);
+void print(Node* head);
+void deleteNode(int id, Node* current, Node*& head);
+
+
 int main() {
-	bool continue = true;
-	Node* head = new Node();
+	bool continueon = true;
+	Node* head = new Node(new Student());
 
 	cout << "Welcome to StudentList v. 2. Uses a LinkedList implementation now." << endl;
-	while(continue) {
+	while(continueon) {
 		char* input = new char[20];
 		cin >> input;
 			cout << "Would you like to ADD, PRINT, DELETE, or EXIT?" << endl;
@@ -24,21 +31,21 @@ int main() {
 			case PRINT:
 				print(head);
 			case DELETE:
-				if(current->getStudent()->getId() == head->getStudent()->getId()) {
-					Node temp = head;
+				cout << "What is the id of the student you want to delete?" << endl;
+				int id;
+				cin >> id;
+				if(id == head->getStudent()->getId()) {
+					Node* temp = head;
 					head = head->getNext();
 					delete temp;
 				}
 			case EXIT:
-				continue = false;
+				continueon = false;
 		}
 	}
 
 
 	return 0;
-
-
-
 }
 
 
@@ -57,33 +64,33 @@ int parseCommand(char *input) {
 		return EXIT;
 	}
 	else {
-		return 0;:
+		return 0;
 	}
 }
 
 //adds a student the vector: list.
 Node* getInfo() {
 	Student* student = new Student();
-	Node newNode = new Node(student);
+	Node* newNode = new Node(student);
 
 	cout << "Enter first name: ";
-	cin >> student->first;
+	cin >> student->setFirst();
 	cin.clear();
 
 	//deals with last name
 	cout << "Enter last name: ";
-	cin >> student->last;
+	cin >> student->setLast();
 	cin.clear();
 
 	//deals with id
 	cout << "Enter ID number: ";
-	cin >> student->id;
+	cin >> student->setId();
 
 	cin.clear();
 
 	//deals with gpa
 	cout << "Enter GPA: ";
-	cin >> student->gpa;
+	cin >> student->setGpa();
 
 	return newNode;
 }
@@ -109,9 +116,11 @@ void print(Node* current) {
 	}
 }
 //deletes a student from the LinkedList based on ID
-void delete(int id, Node* current, Node*& head) {
+void deleteNode(int id, Node* current, Node*& head) {
 	//checks the edge of when the head node is the node to delete
-
+	if (/* condition */) {
+		/* code */
+	}
 	else if(current->getStude)
 
 }
