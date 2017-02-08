@@ -2,19 +2,20 @@
 #include "node.h"
 #include <vector>
 #include <iostream>
+
+
 #define ADD 1
 #define PRINT 2
 #define DELETE 3
 #define EXIT 4
-
+#define AVERAGE 5;
 using namespace std;
 
 int parseCommand(char* input);
 Node* getInfo();
-void add(Node* current, Node* head);
+void add(Node*& head, Node* current);
 void print(Node* head);
 void deleteNode(int id, Node* current, Node*& head);
-
 
 int main() {
 	bool continueon = true;
@@ -27,7 +28,7 @@ int main() {
 			cout << "Would you like to ADD, PRINT, DELETE, or EXIT?" << endl;
 		switch(parseCommand(input)) {
 			case ADD:
-				add(getInfo(), head);
+				add(head, getInfo());
 			case PRINT:
 				print(head);
 			case DELETE:
@@ -43,8 +44,6 @@ int main() {
 				continueon = false;
 		}
 	}
-
-
 	return 0;
 }
 
@@ -63,6 +62,9 @@ int parseCommand(char *input) {
 	else if(!strcmp(input, "EXIT")) {
 		return EXIT;
 	}
+	else if(!strcmp(input, "AVERAGE")) {
+		return AVERAGE;
+	}
 	else {
 		return 0;
 	}
@@ -71,40 +73,47 @@ int parseCommand(char *input) {
 //adds a student the vector: list.
 Node* getInfo() {
 	Student* student = new Student();
-	Node* newNode = new Node(student);
-
+	char* string = new char[20];
 	cout << "Enter first name: ";
-	cin >> student->setFirst();
+	cin >> string;
 	cin.clear();
+	student->setFirst(string);
 
 	//deals with last name
 	cout << "Enter last name: ";
-	cin >> student->setLast();
+	cin >> string;
 	cin.clear();
+	student->setLast(string);
 
+	int id = 0;
 	//deals with id
 	cout << "Enter ID number: ";
-	cin >> student->setId();
-
+	cin >> temp;
 	cin.clear();
+	student->setId(id);
 
 	//deals with gpa
+	float gpa = 0.0;
 	cout << "Enter GPA: ";
-	cin >> student->setGpa();
-
+	cin >> gpa;
+	cin.clear();
+	student->setGpa(gpa);
+	Node* newNode = new Node(student);
 	return newNode;
 }
+
 //adds an entry to the linkedlist in ascending order based on ID
-void add(Node* node, Node* current) {
-	if(current->getNext() == NULL) {
-		current->setNext(node);
+void add(Node*& head, Node* current) {
+	if(head == NULL) {
+		head = current;
 	}
-	else if(node->getStudent()->getId() < current->getStudent()->getId()) {
-		node->setNext(current->getNext());
-		current->setNext(node);
+	else if(current->getStudent->getId() < head->getStudent->getId()){
+			current->setNext(head);
+			head = current;
 	}
 	else {
-	add(node, current->getNext());
+		Node* next = head->getNext();
+		add(next, current);
 	}
 }
 //prints all students and their information (first, last, GPA, id)

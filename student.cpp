@@ -1,8 +1,6 @@
 //Student.cpp
 //contains the programs listed in student.h Manages four variables
 //First, Last, ID, GPA
-
-
 #include "student.h"
 
 using namespace std;
@@ -41,9 +39,9 @@ void Student::setId(int newId) {
 void Student::setGpa(int newGPA) {
 	gpa = newGPA;
 }
-void Student::setId(int newId) {
-	id = newId;
+void Student::setFirst(char* newfirst) {
+	first = newfirst;
 }
-void Student::setId(int newId) {
-	id = newId;
+void Student::setLast(char* newlast) {
+	last = newlast;
 }
