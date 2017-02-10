@@ -1,13 +1,11 @@
-#pragma once
-
-
+//Node.h
 #include<map>
 #include<iostream>
 #include<stdio.h>
 #include "string.h"
 #include "student.h"
 
-//Node.h 
+//Node.h
 using namespace std;
 
 class Node{

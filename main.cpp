@@ -2,7 +2,7 @@
 #include "node.h"
 #include <vector>
 #include <iostream>
-
+#include <iomanip>
 
 #define ADD 1
 #define PRINT 2
@@ -16,6 +16,8 @@ Node* getInfo();
 void add(Node*& head, Node* current);
 void print(Node* head);
 void deleteNode(int id, Node* current, Node*& head);
+void average(Node* head);
+
 
 int main() {
 	bool continueon = true;
@@ -88,7 +90,7 @@ Node* getInfo() {
 	int id = 0;
 	//deals with id
 	cout << "Enter ID number: ";
-	cin >> temp;
+	cin >> id;
 	cin.clear();
 	student->setId(id);
 
@@ -106,10 +108,12 @@ Node* getInfo() {
 void add(Node*& head, Node* current) {
 	if(head == NULL) {
 		head = current;
+		return;
 	}
-	else if(current->getStudent->getId() < head->getStudent->getId()){
+	else if(current->getStudent()->getId() < head->getStudent()->getId()){
 			current->setNext(head);
 			head = current;
+			return;
 	}
 	else {
 		Node* next = head->getNext();
@@ -125,11 +129,43 @@ void print(Node* current) {
 	}
 }
 //deletes a student from the LinkedList based on ID
-void deleteNode(int id, Node* current, Node*& head) {
-	//checks the edge of when the head node is the node to delete
-	if (/* condition */) {
-		/* code */
+void deleteNode(Node*& head, int id) {
+	Node* temp;
+	//if no head
+	if(head == NULL) {
+		cout << "No students to delete";
+		return;
 	}
-	else if(current->getStude)
+	//if head is the partner to delete
+	if(head->getStudent()->getId() == id) {
+		temp = head;
+		head = head->getNext();
+		delete temp;
+		cout << "Student with ID " << id << " was just deleted :D." << endl;
+		return;
+	}
+	else {
+		temp = head->getNext();
+		deleteNode(temp, id);
+		head->setNext(temp);
+	}
+}
 
+//Averages all student GPAs
+void averageList(Node* head){
+  float total = 0;
+  int number = 0;
+  Node* temp = head;
+  float average = 0;
+  if(head == NULL){
+    cout << "There are no students" << endl;
+    return;
+  }
+  while(temp != NULL){
+    total = total + temp->getStudent()->getGpa();
+    number++;
+    temp = temp->getNext();
+  }
+  average = total/number;
+  cout << "Average: " << setprecision(2) << fixed << average << endl;
 }

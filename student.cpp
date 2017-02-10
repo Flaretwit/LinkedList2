@@ -36,7 +36,7 @@ char* Student::getLast() {
 void Student::setId(int newId) {
 	id = newId;
 }
-void Student::setGpa(int newGPA) {
+void Student::setGpa(float newGPA) {
 	gpa = newGPA;
 }
 void Student::setFirst(char* newfirst) {

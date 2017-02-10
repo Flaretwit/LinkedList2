@@ -8,9 +8,9 @@ class Student {
 		Student();
 		~Student();
 		void setId(int id);
-		void setGpa(float gpa);
+		void setGpa(float newGPA);
 		void setFirst(char* first);
-		void setlast(char* last);
+		void setLast(char* last);
 		int getId();
 		float getGpa();
 		char* getFirst();
