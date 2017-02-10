@@ -8,47 +8,50 @@
 #define PRINT 2
 #define DELETE 3
 #define EXIT 4
-#define AVERAGE 5;
+#define AVERAGE 5
+
 using namespace std;
 
 int parseCommand(char* input);
 Node* getInfo();
 void add(Node*& head, Node* current);
 void print(Node* head);
-void deleteNode(int id, Node* current, Node*& head);
-void average(Node* head);
+void deleteNode(Node*& head, int id);
+void averageList(Node* head);
 
 
 int main() {
 	bool continueon = true;
-	Node* head = new Node(new Student());
+	Node* head;
 
 	cout << "Welcome to StudentList v. 2. Uses a LinkedList implementation now." << endl;
 	while(continueon) {
 		char* input = new char[20];
+		cout << "Would you like to ADD, PRINT, DELETE, or EXIT?" << endl;
 		cin >> input;
-			cout << "Would you like to ADD, PRINT, DELETE, or EXIT?" << endl;
+						int id2 = 0;
 		switch(parseCommand(input)) {
 			case ADD:
 				add(head, getInfo());
+				break;
 			case PRINT:
+				if(head!= NULL) {
 				print(head);
+			}
+				break;
 			case DELETE:
 				cout << "What is the id of the student you want to delete?" << endl;
-				int id;
-				cin >> id;
-				if(id == head->getStudent()->getId()) {
-					Node* temp = head;
-					head = head->getNext();
-					delete temp;
-				}
+				cin >> id2;
+				deleteNode(head, id2);
+				break;
 			case AVERAGE:
-				average(head);
-			}
+				averageList(head);
+				break;
 			case EXIT:
-				continueon = false;
+					continueon = false;
+					break;
+			}
 		}
-	}
 	return 0;
 }
 
@@ -78,17 +81,17 @@ int parseCommand(char *input) {
 //adds a student the vector: list.
 Node* getInfo() {
 	Student* student = new Student();
-	char* string = new char[20];
+	char* first = new char[20];
 	cout << "Enter first name: ";
-	cin >> string;
+	cin >> first;
 	cin.clear();
-	student->setFirst(string);
-
+	student->setFirst(first);
+  char* last = new char[20];
 	//deals with last name
 	cout << "Enter last name: ";
-	cin >> string;
+	cin >> last;
 	cin.clear();
-	student->setLast(string);
+	student->setLast(last);
 
 	int id = 0;
 	//deals with id
@@ -101,7 +104,6 @@ Node* getInfo() {
 	float gpa = 0.0;
 	cout << "Enter GPA: ";
 	cin >> gpa;
-	cin.clear();
 	student->setGpa(gpa);
 	Node* newNode = new Node(student);
 	return newNode;
@@ -121,6 +123,7 @@ void add(Node*& head, Node* current) {
 	else {
 		Node* next = head->getNext();
 		add(next, current);
+		head->setNext(next);
 	}
 }
 //prints all students and their information (first, last, GPA, id)
