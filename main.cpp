@@ -42,6 +42,9 @@ int main() {
 					head = head->getNext();
 					delete temp;
 				}
+			case AVERAGE:
+				average(head);
+			}
 			case EXIT:
 				continueon = false;
 		}
